@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>get video from pipixia</title>
+  </head>
+  <body>
+    <input id="urlInput" type="text" placeholder="item url..." />
+    <button onclick="retriveUrl()">parse</button>
+    <hr />
+    <p>result:</p>
+    <div id="result"></div>
+    <script>
+      urlInput.focus();
+      function retriveUrl() {
+        const itemUrl = urlInput.value;
+        const urlParser = document.createElement("a");
+        urlParser.href = itemUrl;
+        path = urlParser.pathname;
+        const itemId = path.substr(path.lastIndexOf("/") + 1);
+        const api = `https://h5.pipix.com/bds/webapi/item/detail/?item_id=${itemId}`;
+        result.innerHTML = `<a href="${api}" target="_blank">${api}</a>`;
+
+        // NOTE: for cors reason, we can not do the following without backend support
+        // fetch(api,{
+        //     mode:'no-cors'
+        // })
+        //   .then(res =>{
+        //       console.log(res)
+        //     //   res.json()
+        //   })
+        //   .then(data => {
+        //     const url = data.data.item.origin_video_download.url_list[0].url;
+        //     result.innnerHTML = `<a href="${url}">${url}</a>`;
+        //   });
+      }
+    </script>
+  </body>
+</html>
