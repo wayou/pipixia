@@ -7,14 +7,17 @@
     <title>get video from pipixia</title>
   </head>
   <body>
-    <input id="urlInput" type="text" placeholder="item url..." />
-    <button onclick="retriveUrl()">parse</button>
+    <form onsubmit="retriveUrl(event)">
+      <input id="urlInput" type="text" placeholder="item url..." />
+      <button type="submit">parse</button>
+    </form>
     <hr />
     <p>result:</p>
     <div id="result"></div>
     <script>
       urlInput.focus();
-      function retriveUrl() {
+      function retriveUrl(e) {
+        e.preventDefault();
         const itemUrl = urlInput.value;
         const urlParser = document.createElement("a");
         urlParser.href = itemUrl;
